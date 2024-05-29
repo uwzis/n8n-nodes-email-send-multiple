@@ -16,7 +16,7 @@ const versionDescription: INodeTypeDescription = {
 	name: 'emailSendMultiple',
 	icon: 'fa:envelope',
 	group: ['output'],
-	version: [1],
+	version: [2],
 	description: 'Multiple sends an email using SMTP protocol',
 	defaults: {
 		name: 'Send Email Multiple',

@@ -1,15 +1,15 @@
 {
   "name": "n8n-nodes-email-send-multiple",
-  "version": "0.1.0",
-  "description": "N8N community node that allows users to create global constants and use them in all their workflows",
+  "version": "0.1.4",
+  "description": "N8N community node that allows users to create Multiple sends an email using SMTP protocol and use them in all their workflows",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
   "homepage": "",
   "author": {
-    "name": "Vasily Maslyukov",
-    "email": "auro.coding@gmail.com"
+    "name": "Arslan Saiduganov",
+    "email": "arslan.sayduganov@gmail.com"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,7 @@
     "dist"
   ],
   "n8n": {
-    "n8nNodesApiVersion": 1,
+    "n8nNodesApiVersion": 2,
     "credentials": [
       "dist/credentials/EmailSendMultipleCredentials.credentials.js"
     ],

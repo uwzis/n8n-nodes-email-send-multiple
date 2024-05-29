@@ -238,8 +238,8 @@ function parseAccount(account: string): any {
 	return accountSettings;
 }
 
-function configureTransport(credentials: EmailSendMultipleCredentialsData, options: EmailSendOptions, user: string) {
-	let userCredentials = {} as any;
+function configureTransport(credentials: EmailSendMultipleCredentialsData, options: EmailSendOptions, user: string, iExecute: IExecuteFunctions) {
+	let userCredentials = null as any;
 	const emailSendMultiple = {} as any;
 	credentials.emailSendMultiple.split('\n').forEach((account) => {
 		const accountSettings = parseAccount(account);
@@ -253,6 +253,26 @@ function configureTransport(credentials: EmailSendMultipleCredentialsData, optio
 
 	if (!userCredentials) {
 		userCredentials = parseAccount(user);
+	}
+
+	if (!userCredentials) {
+		throw new NodeApiError(iExecute.getNode(), { message: `Для User '${user}' не найдены данные` });
+	}
+
+	if (!userCredentials.host) {
+		throw new NodeApiError(iExecute.getNode(), { message: `Для User '${user}' не указан Host` });
+	}
+	if (!userCredentials.port) {
+		throw new NodeApiError(iExecute.getNode(), { message: `Для User '${user}' не указан Port` });
+	}
+	if (!userCredentials.secure) {
+		throw new NodeApiError(iExecute.getNode(), { message: `Для User '${user}' не указан Secure` });
+	}
+	if (!userCredentials.user) {
+		throw new NodeApiError(iExecute.getNode(), { message: `Для User '${user}' не указан User` });
+	}
+	if (!userCredentials.password) {
+		throw new NodeApiError(iExecute.getNode(), { message: `Для User '${user}' не указан Password` });
 	}
 
 	const connectionOptions: SMTPTransport.Options = {
@@ -302,7 +322,7 @@ export async function execute(this: IExecuteFunctions): Promise<INodeExecutionDa
 
 			const credentials = await this.getCredentials(CREDENTIALS_NAME) as unknown as EmailSendMultipleCredentialsData;
 
-			const transporter = configureTransport(credentials, options, user);
+			const transporter = configureTransport(credentials, options, user, this);
 
 			const mailOptions: IDataObject = {
 				from: fromEmail,
