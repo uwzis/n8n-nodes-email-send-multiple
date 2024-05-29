@@ -14,9 +14,9 @@ import * as send from './send.operation';
 const versionDescription: INodeTypeDescription = {
 	displayName: 'Send Email Multiple',
 	name: 'emailSendMultiple',
-	icon: 'fa:envelope',
+	icon: 'fa:envelopes-bulk',
 	group: ['output'],
-	version: [2],
+	version: [1],
 	description: 'Multiple sends an email using SMTP protocol',
 	defaults: {
 		name: 'Send Email Multiple',

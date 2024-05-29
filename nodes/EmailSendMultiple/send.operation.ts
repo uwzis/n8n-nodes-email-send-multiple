@@ -243,9 +243,9 @@ function configureTransport(credentials: EmailSendMultipleCredentialsData, optio
 	const emailSendMultiple = {} as any;
 	credentials.emailSendMultiple.split('\n').forEach((account) => {
 		const accountSettings = parseAccount(account);
-		if (accountSettings?.name) {
-			emailSendMultiple[accountSettings.name] = accountSettings;
-			if (accountSettings.name === user) {
+		if (accountSettings?.user) {
+			emailSendMultiple[accountSettings.user] = accountSettings;
+			if (accountSettings.user === user) {
 				userCredentials = accountSettings;
 			}
 		}
@@ -277,8 +277,8 @@ function configureTransport(credentials: EmailSendMultipleCredentialsData, optio
 
 	const connectionOptions: SMTPTransport.Options = {
 		host: userCredentials.host as string,
-		port: userCredentials.port as number,
-		secure: userCredentials.secure as boolean,
+		port: +userCredentials.port as number,
+		secure: userCredentials.secure?.toLowerCase() === 'true',
 	};
 
 	if (typeof userCredentials.hostName === 'string' && userCredentials.hostName) {
