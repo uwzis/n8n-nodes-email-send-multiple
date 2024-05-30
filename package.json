@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-email-send-multiple",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "N8N community node that allows users to create Multiple sends an email using SMTP protocol and use them in all their workflows",
   "keywords": [
     "n8n-community-node-package"
